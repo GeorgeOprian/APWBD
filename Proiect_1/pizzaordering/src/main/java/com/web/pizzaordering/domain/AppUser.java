@@ -3,6 +3,7 @@ package com.web.pizzaordering.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -24,7 +25,8 @@ public class AppUser {
     @Column(name = "EMAIL")
     private String email;
 
-
+    @OneToMany(mappedBy = "user")
+    private List<UserOrder> orders;
 
 
 }

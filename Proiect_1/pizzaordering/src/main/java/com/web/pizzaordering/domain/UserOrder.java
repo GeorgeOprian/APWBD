@@ -17,6 +17,13 @@ public class UserOrder {
     @Column(name = "APP_USER_ID")
     private Integer userId;
 
-//    @OneToOne(mappedBy = "orderId")
-//    private OrderAddress address;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private OrderAddress address;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Payment payment;
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private AppUser user;
 }
