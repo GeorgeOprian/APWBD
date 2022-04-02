@@ -1,57 +1,58 @@
-CREATE TABLE APP_USER
+create table app_user
 (
-  USER_ID INT NOT NULL,
-  USER_NAME VARCHAR(100) NOT NULL,
-  PHONE_NUMBER CHAR(10) NOT NULL,
-  EMAIL VARCHAR(50) NOT NULL,
-  PRIMARY KEY (USER_ID)
+  user_id int NOT NULL auto_increment,
+  user_name varchar(100) not null,
+  first_name varchar (100) not null,
+  last_name varchar (100) not null,
+  phone_number char(10) not null,
+  email varchar(50) not null,
+  primary key (user_id)
 );
 
-CREATE TABLE PRODUCT
+create table product
 (
-  PRODUCT_ID INT NOT NULL,
-  NAME VARCHAR(100) NOT NULL,
-  QUANTITY decimal(10, 3) NOT NULL,
-  UNIT_PRICE decimal(10, 3) NOT NULL,
-  INGREDIENTS VARCHAR(200) NOT NULL,
-  PRIMARY KEY (PRODUCT_ID)
+  product_id int NOT NULL auto_increment,
+  name varchar(100) not null,
+  quantity decimal(10, 3) not null,
+  unit_price decimal(10, 3) not null,
+  ingredients varchar(200) not null,
+  primary key (product_id)
 );
 
-CREATE TABLE USER_ORDER
+create table user_order
 (
-  ORDER_ID INT NOT NULL,
-  USER_ID INT NOT NULL,
-  PRIMARY KEY (ORDER_ID),
-  FOREIGN KEY (USER_ID) REFERENCES APP_USER(USER_ID)
+  order_id int NOT NULL auto_increment,
+  user_id int not null,
+  primary key (order_id),
+  foreign key (user_id) references app_user(user_id)
 );
 
-CREATE TABLE ORDER_PRODUCT
+create table order_product
 (
-  PRODUCT_ID INT NOT NULL,
-  ORDER_ID INT NOT NULL,
-  QUANTITY decimal(10, 3) NOT NULL,
-  PRICE decimal(10, 3) NOT NULL,
-  PRIMARY KEY (PRODUCT_ID, ORDER_ID),
-  FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT(PRODUCT_ID),
-  FOREIGN KEY (ORDER_ID) REFERENCES USER_ORDER(ORDER_ID)
+  product_id int NOT NULL,
+  order_id int not null,
+  quantity decimal(10, 3) not null,
+  price decimal(10, 3) not null,
+  primary key (product_id, order_id),
+  foreign key (product_id) references product(product_id),
+  foreign key (order_id) references user_order(order_id)
 );
 
-CREATE TABLE PAYMENT
+create table payment
 (
-  PRIMARY KEY (PAYMENT_ID),
-  PAYMENT_METHOD VARCHAR(20) NOT NULL,
-  TOTAL decimal(10, 3) NOT NULL,
-  PAYMENT_ID INT NOT NULL,
-  ORDER_ID INT NOT NULL,
-  FOREIGN KEY (ORDER_ID) REFERENCES USER_ORDER(ORDER_ID)
+  order_id int not null,
+  payment_method varchar(20) not null,
+  amount decimal(10, 3) not null,
+  primary key (order_id),
+  foreign key (order_id) references user_order(order_id)
 );
 
-CREATE TABLE ORDER_ADDRESS
+create table order_address
 (
-  ORDER_ID INT NOT NULL,
-  CITY VARCHAR(50) NOT NULL,
-  STREET VARCHAR(100) NOT NULL,
-  NUMBER INT NOT NULL,
-  PRIMARY KEY (ORDER_ID),
-  FOREIGN KEY (ORDER_ID) REFERENCES USER_ORDER(ORDER_ID)
+  order_id int not null,
+  city varchar(50) not null,
+  street varchar(100) not null,
+  number int not null,
+  primary key (order_id),
+  foreign key (order_id) references user_order(order_id)
 );
