@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie not found</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="jumbotron">
+    <h1>Movies</h1>
+    <p>movies mongodb collection.</p>
+</div>
+
+    <div class="container">
+        <p> movie with id not found</p>
+        <p th:text="${id}"></p>
+
+
+    </div>
+</body>
+</html>
