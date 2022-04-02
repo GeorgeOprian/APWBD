@@ -1,0 +1,31 @@
+Useri
+Pizza
+Bauturi
+Nota
+
+
+Pagini:
+	- register
+		- user name
+		- email
+		- parola
+	- log-in
+		- user + parola
+	- meniu
+		- pizza
+			- ingrediente
+			- pret
+			- cantitate
+		- bauturi
+			- pret
+			- cantitate
+		- in dreptul fiecarui produs sa fie un link cu adauga in cos
+	- cos de cumparaturi
+		- buton "Plaseaza comanda"
+	- comenzi pentru utilizator
+		- lista produse
+		- pret pe fiecare produs
+		- total
+		- status comanda
+			
+	

@@ -1,0 +1,9 @@
+Saptaman 6:
+	- (done) definire entitati java + bd
+	- (joi)(relatii+repository-uri pentru entitati)
+	- documentare Spring MVC + thymeleaf - Practice 5
+	- adaugare produse
+	- listare in meniu
+	
+	- documentare spring security si ce ar trebui sa fac cu autentifcarea
+	
