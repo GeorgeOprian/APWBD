@@ -6,6 +6,7 @@ create table app_user
   last_name varchar (100) not null,
   phone_number char(10) not null,
   email varchar(50) not null,
+  user_type varchar(20) not null,
   primary key (user_id)
 );
 
@@ -16,6 +17,7 @@ create table product
   quantity decimal(10, 3) not null,
   unit_price decimal(10, 3) not null,
   ingredients varchar(200) not null,
+  product_type varchar(20) not null,
   primary key (product_id)
 );
 

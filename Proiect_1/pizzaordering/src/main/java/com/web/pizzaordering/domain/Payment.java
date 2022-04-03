@@ -24,6 +24,7 @@ public class Payment implements Serializable {
     private Order order;
 
     @Column(name = "PAYMENT_METHOD")
+    @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
     @Column(name = "AMOUNT")

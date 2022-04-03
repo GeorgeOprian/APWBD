@@ -1,5 +1,6 @@
 package com.web.pizzaordering.domain;
 
+import com.web.pizzaordering.domain.types.ProductTypes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,5 +37,9 @@ public class Product {
 
     @Column(name = "INGREDIENTS")
     private String ingredients;
+
+    @Column(name = "PRODUCT_TYPE")
+    @Enumerated(EnumType.STRING)
+    private ProductTypes productType;
 
 }

@@ -1,5 +1,6 @@
 package com.web.pizzaordering.domain;
 
+import com.web.pizzaordering.domain.types.UserTypes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,6 +36,10 @@ public class User {
 
     @Column(name = "EMAIL")
     private String email;
+
+    @Column (name = "USER_TYPE")
+    @Enumerated(EnumType.STRING)
+    private UserTypes userType;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Order> orders;
