@@ -1,11 +1,12 @@
 create table app_user
 (
   user_id int NOT NULL auto_increment,
-  user_name varchar(100) not null,
+  user_name varchar(100) not null unique,
+  password varchar(100) not null,
   first_name varchar (100) not null,
   last_name varchar (100) not null,
   phone_number char(10) not null,
-  email varchar(50) not null,
+  email varchar(50) not null unique,
   user_type varchar(20) not null,
   primary key (user_id)
 );
@@ -13,12 +14,21 @@ create table app_user
 create table product
 (
   product_id int NOT NULL auto_increment,
-  name varchar(100) not null,
+  name varchar(100) not null unique,
   quantity decimal(10, 3) not null,
   unit_price decimal(10, 3) not null,
-  ingredients varchar(200) not null,
+  ingredients varchar(200) default '',
   product_type varchar(20) not null,
   primary key (product_id)
+);
+
+create table product_image
+(
+    id int NOT NULL auto_increment,
+    product_id int NOT NULL,
+    image mediumblob,
+    primary key (id),
+    foreign key (product_id) references product(product_id)
 );
 
 create table user_order

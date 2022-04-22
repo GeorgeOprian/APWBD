@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 
 @Data
@@ -27,6 +28,7 @@ public class Payment implements Serializable {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
+    @Positive(message = "Must be positive")
     @Column(name = "AMOUNT")
     private Double amount;
 

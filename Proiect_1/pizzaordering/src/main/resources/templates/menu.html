@@ -12,6 +12,7 @@
         <table class="table table-hover">
             <thead class="thead-inverse">
                 <tr>
+                    <th></th>
                     <th>Pizza Name</th>
                     <th>Weight (g)</th>
                     <th>Ingredients</th>
@@ -21,6 +22,9 @@
             <tr th:each="product, stat: ${pizzas}"
                 th:class="${stat.odd}? 'table-light': 'table-dark'"
             >
+                <td>
+                    <img th:src="@{'/product/getimage/' + ${product.productId}}" width="100" height="100">
+                </td>
                 <td th:text="${product.productName}">Pizza</td>
                 <td th:text="${product.quantity}">Weight</td>
                 <td th:text="${product.ingredients}">Ingredients</td>
@@ -37,6 +41,7 @@
         <table class="table table-hover">
             <thead class="thead-inverse">
             <tr>
+                <th></th>
                 <th>Drink Name</th>
                 <th>Volume (ml)</th>
                 <th>Price (ron)</th>
@@ -45,7 +50,10 @@
             <tr th:each="product, stat: ${drinks}"
                 th:class="${stat.odd}? 'table-light': 'table-dark'"
             >
-                <td th:text="${product.productName}">Pizza</td>
+                <td>
+                    <img th:src="@{'/product/getimage/' + ${product.productId}}" width="100" height="100">
+                </td>
+                <td th:text="${product.productName}">Drink</td>
                 <td th:text="${product.quantity}">Volume</td>
                 <td th:text="${product.unitPrice}">Price</td>
                 <!--    <td><a href="#" th:href="@{'/product/info/' + ${product.id}}">Info</a></td>-->

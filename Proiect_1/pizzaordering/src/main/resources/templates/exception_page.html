@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unique constaint Violation</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>There was a problem with this action.</h1>
+    <h1>Message: </h1>
+    <h1 th:text = "${exception.getMessage()}"></h1>
+    <h1>Cause</h1>
+    <h1 th:text = "${exception.getCause()}"></h1>
+</body>
+</html>

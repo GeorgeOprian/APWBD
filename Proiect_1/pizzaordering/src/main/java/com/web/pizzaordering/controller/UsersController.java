@@ -1,8 +1,7 @@
 package com.web.pizzaordering.controller;
 
-import com.web.pizzaordering.domain.Order;
-import com.web.pizzaordering.domain.OrderProduct;
 import com.web.pizzaordering.domain.User;
+
 import com.web.pizzaordering.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

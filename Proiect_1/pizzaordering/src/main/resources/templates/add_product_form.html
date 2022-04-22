@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <style>
+        .input_error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<form th:object="${product}" th:action="@{/menu/products/add_product/}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{productId}"/>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background-color:lightgray;">
+                <h1 class="panel-title">Add a pizza or a drink</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label>Product name:</label>
+                        <input type="text" class="form-control" th:field="*{productName}"/>
+                        <label class="input_error" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}">Error</label>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>Weight (g) / Volume(ml):</label>
+                        <input type="number" class="form-control" th:field="*{quantity}"/>
+                        <label class="input_error" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Error</label>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>Price:</label>
+                        <input type="number" step="0.1" min="0.1" class="form-control" th:field="*{unitPrice}"/>
+                        <label class="input_error" th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}">Error</label>
+                    </div>
+                </div>
+
+<!--                <div class="row">-->
+                <label>Type:</label>
+                <label class="input_error" th:if="${#fields.hasErrors('productType')}" th:errors="*{productType}">Error</label>
+                <div class="col-md-3 form-group"
+                     th:each="type : ${T(com.web.pizzaordering.domain.types.ProductTypes).values()}">
+                    <div class="custom-control custom-radio custom-control">
+                        <input type="radio" th:field="*{productType}" th:value="${type}" class="custom-control-input" th:checked="ProductTypes.PIZZA">
+                        <label class="custom-control-label" th:for="${#ids.prev('productType')}" th:text="${type.displayName}">Product Type</label>
+                    </div>
+                </div>
+
+                <div class = "row">
+                    <label>Ingredients:</label>
+                    <textarea class="form-control"  th:field = "*{ingredients}"></textarea>
+                </div>
+
+                <div class="col-md-3 ">
+                    <label class="control-label">Select an presentation image</label>
+<!--                    <label class="input_error" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Error</label>-->
+                    <input id="imagefile" name="imagefile" type="file" class="file">
+                </div>
+
+                <div class="row" style = "margin-top: 50px">
+                    <div class="col-md-7 ml-md-auto">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
