@@ -7,9 +7,30 @@ create table app_user
   last_name varchar (100) not null,
   phone_number char(10) not null,
   email varchar(50) not null unique,
-  user_type varchar(20) not null,
+  account_not_expired bit(1) DEFAULT NULL,
+  account_not_locked bit(1) DEFAULT NULL,
+  credentials_not_expired bit(1) DEFAULT NULL,
+  enabled bit(1) DEFAULT NULL,
+  authority_id int NOT NULL,
   primary key (user_id)
 );
+
+CREATE TABLE authority (
+ id int NOT NULL,
+ role varchar(255) DEFAULT NULL,
+ PRIMARY KEY (id)
+);
+
+CREATE TABLE user_authority
+(
+    user_id      int NOT NULL,
+    authority_id int NOT NULL,
+    PRIMARY KEY (user_id, authority_id),
+    KEY            FKgvxjs381k6f48d5d2yi11uh89 (authority_id),
+    CONSTRAINT authority_fk FOREIGN KEY (authority_id) REFERENCES authority (id),
+    CONSTRAINT user_fk FOREIGN KEY (user_id) REFERENCES app_user (user_id)
+);
+                                      
 
 create table product
 (

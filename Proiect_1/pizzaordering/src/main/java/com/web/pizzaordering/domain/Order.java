@@ -1,5 +1,6 @@
 package com.web.pizzaordering.domain;
 
+import com.web.pizzaordering.domain.security.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

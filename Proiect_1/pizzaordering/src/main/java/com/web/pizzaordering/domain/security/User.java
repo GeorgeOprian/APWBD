@@ -1,21 +1,20 @@
-package com.web.pizzaordering.domain;
+package com.web.pizzaordering.domain.security;
 
-import com.web.pizzaordering.domain.types.UserTypes;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.web.pizzaordering.domain.Order;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@Builder
 @Table(name = "APP_USER")
 public class User {
 
@@ -34,6 +33,25 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
+    @Singular
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(name="authority_id", referencedColumnName = "id"))
+    private Set<Authority> authorities;
+
+
+    @Builder.Default
+    private Boolean enabled = true;
+
+    @Builder.Default
+    private Boolean accountNotExpired = true;
+
+    @Builder.Default
+    private Boolean accountNotLocked = true;
+
+    @Builder.Default
+    private Boolean credentialsNotExpired = true;
+
     @NotNull(message = "this field is required")
     @Column(name = "FIRST_NAME")
     private String firstName;
@@ -50,12 +68,7 @@ public class User {
     @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "USER_TYPE")
-    @Enumerated(EnumType.STRING)
-    private UserTypes userType;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Order> orders;
-
 
 }

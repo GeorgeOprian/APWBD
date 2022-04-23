@@ -2,7 +2,7 @@ package com.web.pizzaordering;
 
 
 import com.web.pizzaordering.domain.Product;
-import com.web.pizzaordering.domain.User;
+import com.web.pizzaordering.domain.security.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
