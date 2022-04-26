@@ -1,16 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Unique constaint Violation</title>
+    <title>Exception generated</title>
     <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
     <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-    <h1>There was a problem with this action.</h1>
-    <h1>Message: </h1>
-    <h1 th:text = "${exception.getMessage()}"></h1>
-    <h1>Cause</h1>
-    <h1 th:text = "${exception.getCause()}"></h1>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Pizza ordering app</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/menu">Menu</a></li>
+                <li>
+                    <h4>Logged User:<span sec:authentication="name">user</span>
+                        Roles: <span sec:authentication="principal.authorities">ROLE_USER</span>
+                    </h4>
+                </li>
+            </ul>
+            <div class="col-md-3">
+                <form th:action="@{/logout}" method="POST"> <input type="submit" class="btn btn-primary" value="Log out"> </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>There was a problem with this action.</h1>
+        <h1>Message: </h1>
+        <h1 th:text = "${exception.getMessage()}"></h1>
+        <h1>Cause</h1>
+        <h1 th:text = "${exception.getCause()}"></h1>
+    </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.web.pizzaordering.Exceptions;
+package com.web.pizzaordering.exceptions;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;

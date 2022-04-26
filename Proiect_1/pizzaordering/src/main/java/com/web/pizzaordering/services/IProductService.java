@@ -1,7 +1,8 @@
 package com.web.pizzaordering.services;
 
 import com.web.pizzaordering.domain.Product;
-import com.web.pizzaordering.domain.types.ProductTypes;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -16,7 +17,11 @@ public interface IProductService {
 
     List<Product> loadDrinks();
 
-    Product addProduct(Product product);
+    Page<Product> loadPagedPizzas(Pageable page);
+
+    Page<Product> loadPagedDrinks(Pageable page);
+
+    Product saveProduct(Product product);
 
     void saveImage(Integer productId, MultipartFile image);
 

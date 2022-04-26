@@ -1,4 +1,4 @@
-package com.web.pizzaordering.Exceptions;
+package com.web.pizzaordering.exceptions;
 
 public class EntityNotFoundException extends RuntimeException{
 

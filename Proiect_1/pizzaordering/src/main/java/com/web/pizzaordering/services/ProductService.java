@@ -1,12 +1,15 @@
 package com.web.pizzaordering.services;
 
-import com.web.pizzaordering.Exceptions.EntityNotFoundException;
+import com.web.pizzaordering.exceptions.EntityNotFoundException;
 import com.web.pizzaordering.domain.Product;
 import com.web.pizzaordering.domain.ProductImage;
 import com.web.pizzaordering.domain.types.ProductTypes;
 import com.web.pizzaordering.repository.ProductImageRepository;
 import com.web.pizzaordering.repository.ProductRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ProductService implements IProductService{
 
     @Autowired
@@ -49,14 +53,27 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public Product addProduct(Product product) {
-        return productRepository.save(product);
+    public Page<Product> loadPagedPizzas(Pageable page) {
+        return productRepository.findAll(page);
+    }
+
+    @Override
+    public Page<Product> loadPagedDrinks(Pageable page) {
+        return productRepository.findAll(page);
+    }
+
+    @Override
+    public Product saveProduct(Product product) {
+        Product savedProduct = productRepository.save(product);
+        log.info("Product " + product.getProductName() + " was successfully saved.");
+        return savedProduct;
     }
 
     @Override
     public void saveImage(Integer productId, MultipartFile file) {
         try {
             Product product = productRepository.findById(productId).get();
+
 
             Byte[] byteObjects = new Byte[file.getBytes().length];
             int i = 0; for (byte b : file.getBytes()){
@@ -70,13 +87,17 @@ public class ProductService implements IProductService{
             image.setImage(byteObjects);
             product.setImage(image);
             image.setProduct(product);
-            productRepository.save(product); }
+            log.info("Saving image for product " + product.getProductName());
+            productRepository.save(product);
+
+        }
         catch (IOException e) {
         }
     }
 
     @Override
     public void deleteProduct(Integer productId) {
+        log.info("Deleting product with id = " + productId);
         productRepository.deleteById(productId);
     }
 }

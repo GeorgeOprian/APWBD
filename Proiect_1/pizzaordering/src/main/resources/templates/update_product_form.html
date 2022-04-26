@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Product</title>
+    <title>Update Product</title>
     <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -36,23 +36,26 @@
         </div>
     </nav>
 
-    <form th:object="${product}" th:action="@{/menu/products/add_product/}" method="post" enctype="multipart/form-data">
+    <form th:object="${product}" th:action="@{/menu/products/update_product/}" method="POST" enctype="multipart/form-data">
         <input type="hidden" th:field="*{productId}"/>
+        <input type="hidden" th:field="*{productType}"/>
         <div class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading" style="background-color:lightgray;">
-                    <h1 class="panel-title">Add a pizza or a drink</h1>
+                    <h1 class="panel-title">Update product</h1>
                 </div>
                 <div class="panel-body">
                     <div class="row">
+                        <div class="col-md-3"> <img th:src="@{'/product/getimage/' + ${product.productId}}" width="200" height="200"> </div>
+
                         <div class="col-md-3 form-group">
                             <label>Product name:</label>
-                            <input type="text" class="form-control" th:field="*{productName}"/>
+                            <input type="text" class="form-control" th:field="*{productName}" readonly/>
                             <label class="input_error" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}">Error</label>
                         </div>
                         <div class="col-md-3 form-group">
                             <label>Weight (g) / Volume(ml):</label>
-                            <input type="number" class="form-control" th:field="*{quantity}"/>
+                            <input type="number" class="form-control" th:field="*{quantity}" readonly/>
                             <label class="input_error" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Error</label>
                         </div>
                         <div class="col-md-3 form-group">
@@ -62,33 +65,14 @@
                         </div>
                     </div>
 
-                    <div class="panel-body">
-                        <h4>Type:</h4>
-                        <div id = "product_type" class="col-md-3 form-group"
-                             th:each="type : ${T(com.web.pizzaordering.domain.types.ProductTypes).values()}">
-                            <div class="custom-control custom-radio custom-control">
-                                <input type="radio" th:field="*{productType}" th:value="${type}" class="custom-control-input" th:checked="ProductTypes.PIZZA">
-                                <label class="custom-control-label" th:for="${#ids.prev('productType')}" th:text="${type.displayName}">Product Type</label>
-                            </div>
-                        </div>
-                        <label class="input_error" th:if="${#fields.hasErrors('productType')}" th:errors="*{productType}">Error</label>
-                    </div>
-
-                    <div class = "panel-body">
+                    <div class = "panel-body" th:if="${product.productType == T(com.web.pizzaordering.domain.types.ProductTypes).PIZZA}">
                         <label>Ingredients:</label>
                         <textarea class="form-control"  th:field = "*{ingredients}"></textarea>
                     </div>
 
-<!--                    <div class="col-md-3">-->
-                    <div class="panel-body">
-                        <label class="control-label">Select a presentation image</label>
-    <!--                    <label class="input_error" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Error</label>-->
-                        <input id="imagefile" name="imagefile" type="file" class="file">
-                    </div>
-
                     <div class="row" style = "margin-top: 50px">
                         <div class="col-md-7 ml-md-auto">
-                            <button type="submit" class="btn btn-primary">Add Product</button>
+                            <button type="submit" class="btn btn-primary">Update Product</button>
                         </div>
                     </div>
 
@@ -97,8 +81,5 @@
         </div>
     </form>
 
-
-
-<script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 </html>

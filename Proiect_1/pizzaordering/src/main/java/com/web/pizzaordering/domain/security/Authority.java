@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "AUTHORITY")
 public class Authority {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String role;
